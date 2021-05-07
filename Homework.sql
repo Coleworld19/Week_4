@@ -1,44 +1,74 @@
---Question 1
-SELECT last_name
-From actor 
-Where last_name = 'Wahlberg';
-
---Question 2
-SELECT amount
-From payment
-Where amount >= 3.99 and <= 5.99;
-
---Question 3
-Select * 
-From inventory  
-
-
---Question 4
-Select last_name
+--Q1
+Select *
+From customer;
+select *
+from address;
+--Join Table
+select*
+from city;
+--Multijoin
+select first_name 
 From customer
-Where last_name = 'William'
+join city
+on customer.customer_id = city.customer_id
+join address
+on address.address_id = city.address_id;
 
---Question 5
-select * 
+--Q2
+select *
+from customer
+where first_name IN (
+	Select first_name,last_name
+	from payment
+	Group By first_name, last_name 
+	having sum(amount) > 6.99
+);
+
+--Q3
+select *
+from customer
+where customer_id IN (
+	Select customer_id
+	from payment
+	Group By customer_id 
+	having sum(amount) > 175
+);
+
+--Q4
+select *
+from country
+join city
+on country.country_id = city.city_id
+--so what i think i need to do is somehow get the customers names using the number "66" that represents Nepal
+
+--Q5
+select *
 from staff
+--Not sure what to do here
 
---Question 6
-select
+--Q6
+select *
+from actor
+--I think here i would create a join table of actors and films and try to find the number of times an actor apperaed in a film then change it to descending order.
 
---Question 7
-select
+--Q7
+select *
+from film
 
---Question 8
-Select store_id, last_name
-From customer 
-Where last_name LIKE '%es' AND  store_id = 1;
+select *
+from film_actor
 
---Question 9
-Select
-From
+Select first_name, last_name
+from actor
+join flim_actor
+on actor.actor_id - flim.actor.actor_id
+join flim
+on film.film_actor.film_id
+order by actor
+--the "order by" is the part that i am stuck on 
 
---Question 10
-Select rating, COUNT (rating)
-FROM film
-Group BY rating;
+--Q8
+--Not sure what to do here
+
+
 
